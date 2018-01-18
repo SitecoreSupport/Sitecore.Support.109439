@@ -3,6 +3,17 @@
 @using Sitecore.Forms.Mvc.Html
 @model CheckboxListField
 
+@{
+    List<string> selectedValues = Model.Value;
+    if (selectedValues != null)
+    {
+        Model.Items.ForEach(delegate (SelectListItem x)
+        {
+            x.Selected = selectedValues.Contains(x.Value);
+        });
+    }
+}
+
 @using (Html.BeginField())
 {
     var notInline = Model.FormType != FormType.Inline;
